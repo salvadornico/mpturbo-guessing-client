@@ -6,9 +6,19 @@ export interface Driver {
 	name: string
 }
 
+export interface Vote {
+	name: string
+	choices: {
+		first: Driver
+		second: Driver
+		third: Driver
+	}
+}
+
 export interface SeriesEvent {
 	name: string
 	drivers: Driver[]
+	votes: Vote[]
 }
 
 export interface State {

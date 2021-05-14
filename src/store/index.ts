@@ -25,6 +25,25 @@ export default createStore<State>({
 				{ id: 17, name: "Niko Pulić / Aleksandra Kovačić" },
 				{ id: 18, name: "Takamoto Katsuta / Daniel Barritt" },
 			],
+			votes: [
+				{
+					name: "Test",
+					choices: {
+						first: {
+							id: 1,
+							name: "Teemu Suninen / Mikko Markkula",
+						},
+						second: {
+							id: 2,
+							name: "Adrien Fourmaux / Renaud Jamoul",
+						},
+						third: {
+							id: 3,
+							name: "Gus Greensmith / Elliott Edmondson",
+						},
+					},
+				},
+			],
 		},
 	},
 	mutations: {},
