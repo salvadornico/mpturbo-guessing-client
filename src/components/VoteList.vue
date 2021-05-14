@@ -28,3 +28,11 @@ export default defineComponent({
 	},
 })
 </script>
+
+<style lang="stylus" scoped>
+table
+	max-width 75%
+	position relative
+	left 50%
+	transform translateX(-50%)
+</style>

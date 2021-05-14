@@ -4,19 +4,19 @@
 		h2 {{ event.name }}
 		h3 Choose your Top 3
 	.choices
-		select(name="first" v-model="choices.first" @change="onSelect($event)")
+		select(name="first" v-model="choices.first")
 			option(value="")
 			option(v-for="driver in getAvailableDrivers('first')" :key="driver.id" :value="driver") {{ driver.name }}
 		br
-		select(name="second" v-model="choices.second" @change="onSelect($event)")
+		select(name="second" v-model="choices.second")
 			option(value="")
 			option(v-for="driver in getAvailableDrivers('second')" :key="driver.id" :value="driver") {{ driver.name }}
 		br
-		select(name="third" v-model="choices.third" @change="onSelect($event)")
+		select(name="third" v-model="choices.third")
 			option(value="")
 			option(v-for="driver in getAvailableDrivers('third')" :key="driver.id" :value="driver") {{ driver.name }}
 	input(v-model="name" placeholder="Your name")
-	button Submit
+	button(@click="submitVote" :disabled="!canSubmit") Submit
 </template>
 
 <script lang="ts">
@@ -39,7 +39,7 @@ export default defineComponent({
 	setup() {
 		const store = useStore(stateKey)
 
-		const data: VoteFormData = reactive({
+		const formData: VoteFormData = reactive({
 			name: "",
 			choices: {
 				first: null,
@@ -49,10 +49,17 @@ export default defineComponent({
 		})
 
 		const event = computed(() => store.state.event)
+		const canSubmit = computed(
+			() =>
+				formData.name !== "" &&
+				formData.choices.first !== null &&
+				formData.choices.second !== null &&
+				formData.choices.third !== null
+		)
 
 		const getAvailableDrivers = (selected: VoteChoice) => {
-			return store.state.event.drivers.filter((driver) => {
-				const otherFields = { ...data.choices }
+			return event.value.drivers.filter((driver) => {
+				const otherFields = { ...formData.choices }
 				delete otherFields[selected]
 
 				return (
@@ -63,11 +70,17 @@ export default defineComponent({
 			})
 		}
 
-		function onSelect(changeEvent: Event) {
-			console.log(changeEvent)
+		function submitVote() {
+			store.dispatch("saveVote", formData)
 		}
 
-		return { ...toRefs(data), event, getAvailableDrivers, onSelect }
+		return {
+			...toRefs(formData),
+			event,
+			canSubmit,
+			getAvailableDrivers,
+			submitVote,
+		}
 	},
 })
 </script>

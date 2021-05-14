@@ -1,4 +1,4 @@
-import { State } from "@/store/types"
+import { State, Vote } from "@/store/types"
 import { createStore } from "vuex"
 
 export default createStore<State>({
@@ -46,7 +46,16 @@ export default createStore<State>({
 			],
 		},
 	},
-	mutations: {},
-	actions: {},
+	mutations: {
+		addVote(state: State, vote: Vote) {
+			state.event.votes.push(vote)
+		},
+	},
+	actions: {
+		saveVote({ commit }, vote) {
+			// call API here
+			commit("addVote", vote)
+		},
+	},
 	modules: {},
 })
