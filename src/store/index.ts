@@ -4,7 +4,7 @@ import { createStore } from "vuex"
 export default createStore<State>({
 	state: {
 		event: {
-			name: "Rally Portugal",
+			name: "Rally Portugal (20-23 May)",
 			drivers: [
 				{ id: 1, name: "Teemu Suninen / Mikko Markkula" },
 				{ id: 2, name: "Adrien Fourmaux / Renaud Jamoul" },

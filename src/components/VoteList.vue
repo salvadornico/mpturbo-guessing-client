@@ -3,9 +3,9 @@ h2 Votes so far
 table
 	tr
 		th Name
-		th 1st
-		th 2nd
-		th 3rd
+		th 1st 🥇
+		th 2nd 🥈
+		th 3rd 🥉
 	tr(v-for="vote in votes")
 		td {{ vote.name }}
 		td {{ vote.choices.first.name }}
